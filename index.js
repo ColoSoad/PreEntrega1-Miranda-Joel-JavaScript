@@ -1,9 +1,9 @@
 // VARIABLES Y CONSTANTES GLOBALES
-let tPersonal = 1.6
+let tasaPersonal = 1.6
 let pregunta3 = true;
-let conversortPersonal = tPersonal*37.5
-let tPrendaria = 2.5
-let conversortPrendaria = tPrendaria*60
+let conversorTasaPersonal = tasaPersonal*37.5
+let tasaPrendaria = 2.5
+let conversorTasaPrendaria = tasaPrendaria*60
 let credito = 0
 const valorPrenda = (credito*9)/100
 let salario = 0
@@ -68,7 +68,7 @@ function menu() {
                 pregunta2=confirm("¿Desea volver al menú principal?");
                 break;
             case "3":
-                tasas();
+                mostrarTasas();
                 pregunta2=confirm("¿Desea volver al menú principal?");
                 break;
             case "4":
@@ -85,10 +85,17 @@ function menu() {
 function simularCreditoPersonal(salario, antiguedad) {
     if ((salario >= 300000 && antiguedad >= 5 || antiguedad >= 2 && salario >= 600000)) {
         alert("✅Aprovado");
-        credito = parseFloat(prompt("Ingrese el monto a solicitar:"));
-        for (i = 12, j = (1.6), a = .6, b = 1; i <= 48; i+=12, j+=a, b++){
-            console.log("Préstamo | Ctas | Ctas de:  |  %  | Total\n\n$"+credito+" |"+i+"ctas|$"+((credito*j)/(i)).toFixed(2)+" |"+conversortPersonal*b+"% |"+(credito*j).toFixed(2)+"\n\n")
+        credito = prompt("Ingrese el monto a solicitar:");
+        if (credito != ""){
+            credito = parseFloat(credito);
+            for (i = 12, j = (1.6), a = .6, b = 1; i <= 48; i+=12, j+=a, b++){
+                console.log("Préstamo | Ctas | Ctas de:  |  %  | Total\n\n$"+credito+" |"+i+"ctas|$"+((credito*j)/(i)).toFixed(2)+" |"+conversorTasaPersonal*b+"% |"+(credito*j).toFixed(2)+"\n\n")
             }
+        }
+        else{
+            alert("⛔Disculpe, ingrese un monto válido.");
+        }
+        
     }
     else {
         alert("⛔NO aprovado");
@@ -96,9 +103,15 @@ function simularCreditoPersonal(salario, antiguedad) {
 }
 function simularCreditoPrendario(salario, antiguedad) {
     if ((salario >= 500000 && antiguedad >= 5) || (antiguedad >= 2 && salario >= 700000)) {
-        credito = parseFloat(prompt("Ingrese el monto a solicitar:"));
-        for (i = 12, j = (2.5), a = 1.5, b = 1; i <= 72; i+=12, j+=a, b++){
-            console.log("Préstamo | Ctas | Ctas de: |  %  | Total\n\n$"+credito+" |"+i+"ctas|$"+((credito*j)/(i)).toFixed(2)+"|"+conversortPrendaria*b+"% |"+(credito*j).toFixed(2)+"\n\n")
+        credito = prompt("Ingrese el monto a solicitar:");
+        if (credito != ""){
+            credito = parseFloat(credito);
+            for (i = 12, j = (2.5), a = 1.5, b = 1; i <= 72; i+=12, j+=a, b++){
+                console.log("Préstamo | Ctas | Ctas de: |  %  | Total\n\n$"+credito+" |"+i+"ctas|$"+((credito*j)/(i)).toFixed(2)+"|"+conversorTasaPrendaria*b+"% |"+(credito*j).toFixed(2)+"\n\n")
+            }
+        }
+        else {
+            alert("⛔Disculpe, ingrese un monto válido.");
         }
 
     }
@@ -106,16 +119,16 @@ function simularCreditoPrendario(salario, antiguedad) {
         alert("⛔NO aprovado");
     }
 }
-function tasas(){
+function mostrarTasas(){
     let tipoDeTasa = prompt("Ingrese que tipo de tasa de interés:\n(personal - prendario)").toLowerCase().trim();
     switch(tipoDeTasa) {
         case "personal":
-            alert("Los créditos personales estan a una tasa de interés del "+conversortPersonal+"% ANUAL.")
-            console.log("Los créditos personales estan a una tasa de interés del "+conversortPersonal+"% ANUAL.")
+            alert("Los créditos personales estan a una tasa de interés del "+conversorTasaPersonal+"% ANUAL.")
+            console.log("Los créditos personales estan a una tasa de interés del "+conversorTasaPersonal+"% ANUAL.")
             break
         case "prendario":
-            alert("Los créditos prendarios estan a una tasa de interés del "+conversortPrendaria+"% ANUAL.\n⚠️IMPORTANTE: Al momento de adquirir un crédito prendario, se deberá abonar por única vez una prenda del 9% del valor del monto a convenir.")
-            console.log("Los créditos prendarios estan a una tasa de interés del "+conversortPrendaria+"% ANUAL")
+            alert("Los créditos prendarios estan a una tasa de interés del "+conversorTasaPrendaria+"% ANUAL.\n⚠️IMPORTANTE: Al momento de adquirir un crédito prendario, se deberá abonar por única vez una prenda del 9% del valor del monto a convenir.")
+            console.log("Los créditos prendarios estan a una tasa de interés del "+conversorTasaPrendaria+"% ANUAL")
             console.warn("IMPORTANTE: Al momento de adquirir un crédito prendario, se deberá abonar por única vez una prenda del 9% del valor del monto a convenir.");
             break
         default:
